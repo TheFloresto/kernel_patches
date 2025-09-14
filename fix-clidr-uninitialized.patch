@@ -9,4 +9,3 @@
  	/* Make sure tables are unique and in order. */
  	valid &= check_sysreg_table(sys_reg_descs, ARRAY_SIZE(sys_reg_descs), false);
 
-
