@@ -1,7 +1,7 @@
 From d9f79270eb5cbea542cf44fa556ac6d25d6f5b4e Mon Sep 17 00:00:00 2001
 From: deepongi <infectedmushi@gmail.com>
 Date: Sat, 13 Sep 2025 20:50:07 +0100
-Subject: [PATCH] add only WKSU and MKSU managers and KSUN
+Subject: [PATCH] add only WKSU
 
 ---
  kernel/apk_sign.c | 9 +++++++++
