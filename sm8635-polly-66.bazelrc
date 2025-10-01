@@ -1,0 +1,12 @@
+# .bazelrc — safe config for Clang r510928 and kernel 6.6
+
+# SM8635 + Polly “safe” config
+build:sm8635-polly-66 --compilation_mode=opt
+build:sm8635-polly-66 --copt=-O3
+
+# Tune for the mid-cluster (A76); big cores will get at least generic NEON tuning
+build:sm8635-polly-66 --copt=-mtune=cortex-a76
+
+# ✅ Compatible Polly flags for Clang r510928
+build:sm8635-polly-66 --copt=-mllvm --copt=-polly
+build:sm8635-polly-66 --copt=-mllvm --copt=-polly-vectorizer=stripmine

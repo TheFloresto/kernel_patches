@@ -1,0 +1,19 @@
+# Snapdragon 8 Gen 3 Elite (SM8650) — Kernel 6.6 — Cortex-A76 tuning
+build:snapdragon8elite-polly-66 --compilation_mode=opt
+build:snapdragon8elite-polly-66 --copt=-O3
+build:snapdragon8elite-polly-66 --copt=-mcpu=cortex-a720
+build:snapdragon8elite-polly-66 --copt=-mtune=cortex-a76
+
+# Polly optimization
+build:snapdragon8elite-polly-66 --copt=-mllvm --copt=-polly
+build:snapdragon8elite-polly-66 --copt=-mllvm --copt=-polly-per-region
+build:snapdragon8elite-polly-66 --copt=-mllvm --copt=-polly-codegen
+build:snapdragon8elite-polly-66 --copt=-mllvm --copt=-polly-schedule
+
+# Vectorization for NEON (128-bit)
+build:snapdragon8elite-polly-66 --copt=-mllvm --copt=-polly-vectorizer=stripmine
+build:snapdragon8elite-polly-66 --copt=-mllvm --copt=-polly-vector-width=128
+
+# Safe memory optimizations
+build:snapdragon8elite-polly-66 --copt=-mllvm --copt=-polly-invariant-load-hoisting
+build:snapdragon8elite-polly-66 --copt=-mllvm --copt=-polly-simplify-scev-canonical

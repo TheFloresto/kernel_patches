@@ -1,0 +1,25 @@
+# .bazelrc
+
+# SM8635 + Polly “safe” config
+build:sm8635-polly --compilation_mode=opt
+build:sm8635-polly --copt=-O3
+
+# Target ARMv8.4-A with crypto, SIMD, and dot-product extensions
+build:sm8635-polly --copt=-march=armv8.4-a+crc+crypto+simd+dotprod
+
+# Tune for the mid-cluster (A720); big cores will get at least generic NEON tuning
+build:sm8635-polly --copt=-mtune=cortex-a720
+
+# Enable Polly’s core optimizations
+build:sm8635-polly --copt=-mllvm --copt=-polly
+build:sm8635-polly --copt=-mllvm --copt=-polly-per-region
+build:sm8635-polly --copt=-mllvm --copt=-polly-codegen
+build:sm8635-polly --copt=-mllvm --copt=-polly-schedule
+
+# Vectorization tuned to 128-bit NEON
+build:sm8635-polly --copt=-mllvm --copt=-polly-vectorizer=stripmine
+build:sm8635-polly --copt=-mllvm --copt=-polly-vector-width=128
+
+# Low-risk memory/alias helpers
+build:sm8635-polly --copt=-mllvm --copt=-polly-invariant-load-hoisting
+build:sm8635-polly --copt=-mllvm --copt=-polly-simplify-scev-canonical
