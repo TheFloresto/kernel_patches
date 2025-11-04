@@ -1,0 +1,34 @@
+From f8743b0f6ab0bc2df37a04680f0a7604e6cd7901 Mon Sep 17 00:00:00 2001
+From: deepongi <infectedmushi@gmail.com>
+Date: Sun, 2 Nov 2025 22:12:59 +0000
+Subject: [PATCH] -Wdefault-const-init-field-unsafe error
+
+---
+ kernel/params.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/kernel/params.c b/kernel/params.c
+index 5b9231042..1b2e6cf96 100644
+--- a/kernel/params.c
++++ b/kernel/params.c
+@@ -364,7 +364,7 @@ int param_set_invbool(const char *val, const struct kernel_param *kp)
+ {
+ 	int ret;
+ 	bool boolval;
+-	struct kernel_param dummy;
++    struct kernel_param dummy = {};
+ 
+ 	dummy.arg = &boolval;
+ 	ret = param_set_bool(val, &dummy);
+@@ -420,7 +420,7 @@ static int param_array(struct module *mod,
+ 		       unsigned int *num)
+ {
+ 	int ret;
+-	struct kernel_param kp;
++    struct kernel_param kp = {};
+ 	char save;
+ 
+ 	/* Get the name right for errors. */
+-- 
+2.51.2
+

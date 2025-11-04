@@ -1,0 +1,43 @@
+From ffa509b2b7f24f7dd711a37949538f574b8f9e52 Mon Sep 17 00:00:00 2001
+From: deepongi <infectedmushi@gmail.com>
+Date: Thu, 4 Sep 2025 11:31:47 +0100
+Subject: [PATCH] fix clang22 warning: -Wdefault-const-init-field-unsafe
+
+---
+ mm/shmem.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/mm/shmem.c b/mm/shmem.c
+index a970eecb7..d01208d66 100644
+--- a/mm/shmem.c
++++ b/mm/shmem.c
+@@ -1528,7 +1528,7 @@ static void shmem_pseudo_vma_destroy(struct vm_area_struct *vma)
+ static struct folio *shmem_swapin(swp_entry_t swap, gfp_t gfp,
+ 			struct shmem_inode_info *info, pgoff_t index)
+ {
+-	struct vm_area_struct pvma;
++    struct vm_area_struct pvma = {0};
+ 	struct page *page;
+ 	struct vm_fault vmf = {
+ 		.vma = &pvma,
+@@ -1570,7 +1570,7 @@ static gfp_t limit_gfp_mask(gfp_t huge_gfp, gfp_t limit_gfp)
+ static struct folio *shmem_alloc_hugefolio(gfp_t gfp,
+ 		struct shmem_inode_info *info, pgoff_t index)
+ {
+-	struct vm_area_struct pvma;
++    struct vm_area_struct pvma = {0};
+ 	struct address_space *mapping = info->vfs_inode.i_mapping;
+ 	pgoff_t hindex;
+ 	struct folio *folio;
+@@ -1591,7 +1591,7 @@ static struct folio *shmem_alloc_hugefolio(gfp_t gfp,
+ static struct folio *shmem_alloc_folio(gfp_t gfp,
+ 			struct shmem_inode_info *info, pgoff_t index)
+ {
+-	struct vm_area_struct pvma;
++    struct vm_area_struct pvma = {0};
+ 	struct folio *folio = NULL;
+ 
+ 	shmem_pseudo_vma_init(&pvma, info, index);
+-- 
+2.51.0
+

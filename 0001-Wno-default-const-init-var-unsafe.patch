@@ -1,0 +1,22 @@
+diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+index 111111111111..222222222222 100644
+--- a/scripts/Makefile.extrawarn
++++ b/scripts/Makefile.extrawarn
+@@ -1,6 +1,16 @@
+ # SPDX-License-Identifier: GPL-2.0
+ # Additional warning flags
+ 
++ifdef CONFIG_CC_IS_CLANG
++# Clang’s default-const-init warnings are noisy for common kernel idioms:
++#  - -Wdefault-const-init-field-unsafe (structs with const members)
++#  - -Wdefault-const-init-var-unsafe (typeof/const rvalues)
++# Kbuild upstream proposes disabling them globally. [PATCH v2] kbuild: Disable -Wdefault-const-init-unsafe
++# and [PATCH 1/2] kbuild: Disable -Wdefault-const-init-field-unsafe. [web:55][web:39]
++KBUILD_CFLAGS += $(call cc-disable-warning, default-const-init-field-unsafe)
++KBUILD_CFLAGS += $(call cc-disable-warning, default-const-init-var-unsafe)
++endif
++
+ #
+ # When W=1 is used, enable more warnings.  This increases build time, but
+ # it is useful for catching potential issues early.
+
