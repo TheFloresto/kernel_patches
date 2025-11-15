@@ -1,0 +1,20 @@
+--- a/tools/bpf/resolve_btfids/resolve_btfids.c
++++ b/tools/bpf/resolve_btfids/resolve_btfids.c
+@@ -123,6 +123,7 @@ static int parse_syms_cb(void *data, const char *name, Elf64_Sym *sym)
+ 	if (!sym->st_value)
+ 		return 0;
+
++	fprintf(stderr, "DEBUG: Processing symbol %s\n", name); // Debug for BTF fix on glibc 2.38+
+ 	if (sym->st_shndx == SHN_UNDEF || sym->st_shndx == SHN_ABS)
+ 		return 0;
+
+ 	if (ELF64_ST_TYPE(sym->st_info) != STT_FUNC &&
+ 	    ELF64_ST_TYPE(sym->st_info) != STT_OBJECT)
+ 		return 0;
+
+ 	/* Ignore .L symbols */
+ 	if (name[0] == '.')
+ 		return 0;
+
+ 	return add_symbol(data, name, sym->st_value, sym->st_size);
+ }
