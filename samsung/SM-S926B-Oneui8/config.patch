@@ -1,18 +1,9 @@
---- a/arch/arm64/configs/a56_defconfig
-+++ b/arch/arm64/configs/a56_defconfig
-@@ -7049,7 +7049,7 @@
- CONFIG_GAF_V6=y
- CONFIG_DEFAULT_SECURITY_SELINUX=y
- # CONFIG_DEFAULT_SECURITY_DAC is not set
--CONFIG_LSM="landlock,lockdown,yama,loadpin,safesetid,selinux,smack,tomoyo,apparmor,bpf"
-+CONFIG_LSM="landlock,lockdown,baseband_guard,yama,loadpin,safesetid,selinux,smack,tomoyo,apparmor,bpf"
- 
- #
- # Kernel hardening options
-@@ -7820,3 +7820,42 @@
- #
- # end of Rust hacking
- # end of Kernel hacking
+--- a/arch/arm64/configs/gki_defconfig
++++ b/arch/arm64/configs/gki_defconfig
+@@ -774,3 +774,42 @@
+ CONFIG_KUNIT_DEBUGFS=y
+ # CONFIG_KUNIT_DEFAULT_ENABLED is not set
+ # CONFIG_RUNTIME_TESTING_MENU is not set
 +
 +# KSU NEXT
 +CONFIG_KSU=y
