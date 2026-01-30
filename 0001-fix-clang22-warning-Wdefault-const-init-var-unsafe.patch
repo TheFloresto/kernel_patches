@@ -1,0 +1,25 @@
+From 5d79a82292b9b5609b8c0a19b06bb7d789157f8f Mon Sep 17 00:00:00 2001
+From: deepongi <infectedmushi@gmail.com>
+Date: Thu, 4 Sep 2025 11:19:44 +0100
+Subject: [PATCH] fix clang22 warning: -Wdefault-const-init-var-unsafe
+
+---
+ include/linux/typecheck.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/linux/typecheck.h b/include/linux/typecheck.h
+index 46b15e2aa..b21728bce 100644
+--- a/include/linux/typecheck.h
++++ b/include/linux/typecheck.h
+@@ -8,7 +8,7 @@
+  */
+ #define typecheck(type,x) \
+ ({	type __dummy; \
+-	typeof(x) __dummy2; \
++typeof(x) __dummy2 = (typeof(x))0; \
+ 	(void)(&__dummy == &__dummy2); \
+ 	1; \
+ })
+-- 
+2.51.0
+

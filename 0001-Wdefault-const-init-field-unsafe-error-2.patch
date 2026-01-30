@@ -1,0 +1,25 @@
+From 60aa6975a42164d7dc2a40e48d254af746171c74 Mon Sep 17 00:00:00 2001
+From: deepongi <infectedmushi@gmail.com>
+Date: Sun, 2 Nov 2025 22:26:24 +0000
+Subject: [PATCH] -Wdefault-const-init-field-unsafe error 2
+
+---
+ drivers/media/v4l2-core/v4l2-ioctl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/v4l2-core/v4l2-ioctl.c b/drivers/media/v4l2-core/v4l2-ioctl.c
+index 3a4785b3b..765e36a16 100644
+--- a/drivers/media/v4l2-core/v4l2-ioctl.c
++++ b/drivers/media/v4l2-core/v4l2-ioctl.c
+@@ -2984,7 +2984,7 @@ static long __video_do_ioctl(struct file *file,
+ 	struct mutex *lock; /* ioctl serialization mutex */
+ 	const struct v4l2_ioctl_ops *ops = vfd->ioctl_ops;
+ 	bool write_only = false;
+-	struct v4l2_ioctl_info default_info;
++    struct v4l2_ioctl_info default_info = {};
+ 	const struct v4l2_ioctl_info *info;
+ 	void *fh = file->private_data;
+ 	struct v4l2_fh *vfh = NULL;
+-- 
+2.51.2
+
