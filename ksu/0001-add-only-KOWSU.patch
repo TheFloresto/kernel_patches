@@ -21,3 +21,6 @@ index 522eb506..b0449739 100644
 +#else
  	return check_v2_signature(path, expected_manager_size, expected_manager_hash);
 +#endif
+-- 
+2.43.0
+
