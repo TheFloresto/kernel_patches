@@ -11,7 +11,7 @@ diff --git a/kernel/apk_sign.c b/kernel/apk_sign.c
 index 522eb506..b0449739 100644
 --- a/kernel/apk_sign.c
 +++ b/kernel/apk_sign.c
-@@ -387,5 +387,14 @@ bool is_manager_apk(char *path)
+@@ -387,4 +387,9 @@ bool is_manager_apk(char *path)
  	pr_info("%s: expected size: %u, expected hash: %s\n",
  		path, expected_manager_size, expected_manager_hash);
  
