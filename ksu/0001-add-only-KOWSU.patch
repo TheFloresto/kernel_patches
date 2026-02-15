@@ -13,17 +13,17 @@ index 3f2ae2d4..96a3c861 100644
  struct sdesc {
  	struct shash_desc shash;
  	char ctx[];
-@@ -356,9 +360,11 @@ bool is_manager_apk(char *path)
+@@ -356,9 +360,12 @@ bool is_manager_apk(char *path)
  	}
  
  	// pkg is `<real package>`
 -	if (strncmp(pkg, KSU_MANAGER_PACKAGE, sizeof(KSU_MANAGER_PACKAGE))) {
-+	if (strncmp(pkg, KOWSU_KSU_PACKAGE_NAME, sizeof(KOWSU_KSU_PACKAGE_NAME)) || strncmp(pkg, KSU_MANAGER_PACKAGE, sizeof(KSU_MANAGER_PACKAGE))) {
++	if (strncmp(pkg, KOWSU_KSU_PACKAGE_NAME, sizeof(KOWSU_KSU_PACKAGE_NAME)) && strncmp(pkg, KSU_MANAGER_PACKAGE, sizeof(KSU_MANAGER_PACKAGE))) {
  		return false;
  	}
  #endif
 -	return check_v2_signature(path, EXPECTED_MANAGER_SIZE, EXPECTED_MANAGER_HASH);
 +	return (check_v2_signature(path, EXPECTED_MANAGER_SIZE, EXPECTED_MANAGER_HASH)
-+			|| check_v2_signature(path, 0x338, "484fcba6e6c43b1fb09700633bf2fb4758f13cb0b2f4457b80d075084b26c588") // KowSU Manager
++			|| check_v2_signature(path, 0x338, "484fcba6e6c43b1fb09700633bf2fb4758f13cb0b2f4457b80d075084b26c588")); // KowSU Manager
  }
- 
++
